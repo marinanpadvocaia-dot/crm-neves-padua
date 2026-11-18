@@ -6,6 +6,8 @@ Roteiro de 18/11/2026, no mesmo padrão do sistema jurídico: código por **pull
 
 ## 1. Git
 
+> **Decisão de 18/11/2026:** o repositório fica em `nevespaduaadv/crm`, **público** como o `painel` do sistema jurídico (o GitHub Pages gratuito exige repositório público). Não há chave secreta no código; os dados ficam protegidos pelo login e pelo RLS. O app é publicado pelo `.github/workflows/publicar.yml` a cada merge na `main`, só se o `npm test` passar, hoje com o ambiente **homologação**. O item 1 abaixo (privado) ficou superado.
+
 1. **Repositório privado** `nevespaduaadv/crm`. Não deixe público: tem regras de atendimento, procedimentos e a estrutura do banco.
    ```
    gh repo create nevespaduaadv/crm --private --description "CRM e Atendimento Neves Pádua"
@@ -104,6 +106,6 @@ select count(*) as tabelas_crm, count(*) filter (where rowsecurity) as com_rls f
 ## 5. Pendências conhecidas
 
 - `crm_0000` e `crm_0008` (chaves reais para `leads`, `clientes`, `atd_*`, `perfis`).
-- Um teste do rodízio (`atendimento delegado ao primeiro do rodízio do Comercial`, em `tests/sql/ia.mjs`) falhou 1 vez em 8 execuções locais e passou nas outras 7: não investiguei a causa. A função escolhe por `order by m.ordem, m.user_id`, então a suspeita é o estado do teste (rodízio ou ids sorteados). Vale investigar antes de exigir o `verificar` na `main`, para o check não reprovar PR sem motivo.
+- ~~Teste do rodízio intermitente~~ resolvido em 18/11/2026: era só o teste. Quando o cliente pede uma pessoa, os rascunhos pendentes do mesmo contato também viram "transferida" (sem responsável) e, com o mesmo `created_at`, o teste às vezes lia um deles. O teste agora ignora os rascunhos descartados; a tela lê o responsável de cada revisão e não tinha o problema.
 - `package.json`: o campo `description` está com acentos corrompidos (`PÃ¡dua`); corrigir ao salvar em UTF-8.
 - Teste de unidade, integração e o build não foram rodados na minha conferência; só `npm run test:sql` (456 verificações, 24 migrações). O primeiro `verificar` no GitHub mostrará o resto.
