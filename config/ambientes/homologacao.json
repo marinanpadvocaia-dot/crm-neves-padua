@@ -1,7 +1,7 @@
 {
   "nome": "homologacao",
   "rotulo": "Homologação",
-  "supabaseUrl": "",
-  "chavePublicavel": "",
+  "supabaseUrl": "https://mjazxkpjtrksbjqttowz.supabase.co",
+  "chavePublicavel": "sb_publishable_S1cVlairpSQ7nHfyX1iurg_ZLgYC0i1",
   "aviso": "HOMOLOGAÇÃO · dados fictícios · número de WhatsApp de teste. Nunca use dados reais de clientes aqui."
 }

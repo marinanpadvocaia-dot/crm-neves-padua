@@ -2,7 +2,7 @@
   "name": "crm-neves-padua",
   "private": true,
   "version": "0.1.0",
-  "description": "CRM + Atendimento Neves PÃ¡dua â€” front-end (dados fictÃ­cios, sem conexÃ£o)",
+  "description": "CRM + Atendimento Neves Pádua — front-end (dados fictícios, sem conexão)",
   "scripts": {
     "build": "node scripts/build.mjs",
     "build:homologacao": "node scripts/build.mjs --ambiente=homologacao",
