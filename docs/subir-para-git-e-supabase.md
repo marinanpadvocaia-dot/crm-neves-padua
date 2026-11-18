@@ -6,6 +6,8 @@ Roteiro de 18/11/2026, no mesmo padrão do sistema jurídico: código por **pull
 
 ## 1. Git
 
+> **Decisão de 18/11/2026:** o repositório fica em `nevespaduaadv/crm`, **público** como o `painel` do sistema jurídico (o GitHub Pages gratuito exige repositório público). Não há chave secreta no código; os dados ficam protegidos pelo login e pelo RLS. O app é publicado pelo `.github/workflows/publicar.yml` a cada merge na `main`, só se o `npm test` passar, hoje com o ambiente **homologação**. O item 1 abaixo (privado) ficou superado.
+
 1. **Repositório privado** `nevespaduaadv/crm`. Não deixe público: tem regras de atendimento, procedimentos e a estrutura do banco.
    ```
    gh repo create nevespaduaadv/crm --private --description "CRM e Atendimento Neves Pádua"
