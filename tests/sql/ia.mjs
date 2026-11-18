@@ -115,7 +115,7 @@ export default async function({db,q,qs,t,err,A,B}){
     update crm.filas_config set rodizio_ativo=true, rodizio_proximo=0 where fila_ref='comercial';
     delete from crm.fila_membros where fila_ref='comercial';
     insert into crm.fila_membros values ('comercial','${C1}',0),('comercial','${C2}',1);`);
-  const deleg=async c=>(await db.query(`select delegado_id d from crm.revisoes_ia where contato='${c}' and status='transferida' order by created_at desc limit 1`)).rows[0].d;
+  const deleg=async c=>(await db.query(`select delegado_id d from crm.revisoes_ia where contato='${c}' and status='transferida' and motivo is distinct from 'O contato foi para uma pessoa: rascunho descartado.' order by created_at desc limit 1`)).rows[0].d;
   const e8=await reg('mid-8','mensagem',{}),e9=await reg('mid-9','mensagem',{});
   const R8=(await qs(`select crm.ia_registrar(${e8},'${IG}','pendente','instagram:996','@lia','dm:996','Como funciona?','Olá! ...',null) id`)).rows[0].id;
   await qs(`select crm.ia_registrar(${e9},'${IG}','transferida','instagram:996','@lia','dm:996','Quero falar com uma pessoa','','O cliente pediu para falar com uma pessoa.')`);
