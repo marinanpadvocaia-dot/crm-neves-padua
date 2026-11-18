@@ -6,3 +6,4 @@ dist/
 *.log
 d5*.png
 .DS_Store
+supabase/.temp/
