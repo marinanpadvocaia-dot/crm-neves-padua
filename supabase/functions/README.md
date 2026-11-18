@@ -66,6 +66,10 @@ Na Evolution, configurar o webhook da instância para
 
 ## Agendar (pg_cron + pg_net, segredos do lado do banco no Vault)
 
+**Pelo script (recomendado):** `.\scriptsgendar-funcoes.ps1 -Ref <ref>` faz tudo abaixo de uma vez: liga as extensões, gera um `CRON_SEGREDO` novo sem exibir, grava nas Edge Functions e no Vault e cria os agendamentos. Pode rodar de novo (troca o segredo nos dois lugares). Na produção, exige `-AutorizadoProducao`. Homologação ligada em 18/11/2026.
+
+O SQL equivalente, para conferência:
+
 ```sql
 select vault.create_secret('https://<ref>.supabase.co', 'crm_url_projeto');
 select vault.create_secret('<CRON_SEGREDO>', 'crm_cron_segredo');
