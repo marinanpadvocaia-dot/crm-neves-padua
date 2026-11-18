@@ -1,0 +1,7 @@
+{
+  "nome": "demonstracao",
+  "rotulo": "Demonstração",
+  "supabaseUrl": "",
+  "chavePublicavel": "",
+  "aviso": "Protótipo com dados fictícios para validar o fluxo. Nada aqui é enviado ao WhatsApp nem ao CRM."
+}

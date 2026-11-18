@@ -1,0 +1,790 @@
+{
+ "versao": 3,
+ "estaticas": {
+  "canais": [
+   [
+    "qualquer",
+    "Qualquer canal"
+   ],
+   [
+    "whatsapp",
+    "WhatsApp"
+   ],
+   [
+    "instagram",
+    "Instagram"
+   ],
+   [
+    "google",
+    "Google (avaliações)"
+   ]
+  ],
+  "unidades": [
+   [
+    "minutos",
+    "minutos"
+   ],
+   [
+    "horas",
+    "horas"
+   ],
+   [
+    "dias",
+    "dias"
+   ]
+  ],
+  "tipos_atividade": [
+   [
+    "ligacao",
+    "Ligação"
+   ],
+   [
+    "reuniao",
+    "Reunião"
+   ],
+   [
+    "followup",
+    "Follow-up"
+   ],
+   [
+    "tarefa",
+    "Tarefa"
+   ]
+  ],
+  "sujeitos": [
+   [
+    "tag",
+    "Tag do contato"
+   ],
+   [
+    "etapa",
+    "Etapa do negócio"
+   ],
+   [
+    "funil",
+    "Funil do negócio"
+   ],
+   [
+    "canal",
+    "Canal da conversa"
+   ],
+   [
+    "origem",
+    "Origem do negócio"
+   ],
+   [
+    "valor",
+    "Valor do negócio (R$)"
+   ],
+   [
+    "resposta",
+    "Última resposta do cliente"
+   ]
+  ],
+  "operadores": [
+   [
+    "e",
+    "é / tem"
+   ],
+   [
+    "nao_e",
+    "não é / não tem"
+   ],
+   [
+    "contem",
+    "contém"
+   ],
+   [
+    "maior",
+    "maior que"
+   ],
+   [
+    "menor",
+    "menor que"
+   ]
+  ],
+  "modos": [
+   [
+    "todas",
+    "todas as condições forem verdade (E)"
+   ],
+   [
+    "qualquer",
+    "qualquer condição for verdade (OU)"
+   ]
+  ]
+ },
+ "gatilhos": [
+  {
+   "tipo": "nova_conversa",
+   "nome": "Nova conversa",
+   "grupo": "Conversa",
+   "descricao": "Um contato manda a primeira mensagem.",
+   "campos": [
+    {
+     "k": "canal",
+     "rotulo": "Canal",
+     "tipo": "select",
+     "opcoes": "canais",
+     "padrao": "qualquer"
+    }
+   ]
+  },
+  {
+   "tipo": "cliente_respondeu",
+   "nome": "Cliente respondeu",
+   "grupo": "Conversa",
+   "descricao": "O cliente manda uma mensagem (opcional: com certas palavras).",
+   "campos": [
+    {
+     "k": "palavras",
+     "rotulo": "Só se a mensagem tiver (separe por vírgula)",
+     "tipo": "texto"
+    }
+   ]
+  },
+  {
+   "tipo": "cliente_sem_responder",
+   "nome": "Cliente sem responder",
+   "grupo": "Conversa",
+   "descricao": "O escritório mandou mensagem e o cliente não respondeu dentro do tempo (conta a partir da última mensagem enviada).",
+   "campos": [
+    {
+     "k": "minutos",
+     "rotulo": "Minutos sem o cliente responder",
+     "tipo": "numero",
+     "obrig": true,
+     "padrao": 60
+    }
+   ]
+  },
+  {
+   "tipo": "sem_resposta",
+   "nome": "Conversa sem resposta da equipe",
+   "grupo": "Conversa",
+   "descricao": "O cliente escreveu e a equipe ficou sem responder por um tempo.",
+   "campos": [
+    {
+     "k": "minutos",
+     "rotulo": "Minutos sem resposta",
+     "tipo": "numero",
+     "obrig": true,
+     "padrao": 60
+    }
+   ]
+  },
+  {
+   "tipo": "fora_horario",
+   "nome": "Mensagem fora do horário",
+   "grupo": "Conversa",
+   "descricao": "Chegou mensagem fora do horário do setor.",
+   "campos": [
+    {
+     "k": "fila",
+     "rotulo": "Setor",
+     "tipo": "select",
+     "opcoes": "filas",
+     "obrig": true
+    }
+   ]
+  },
+  {
+   "tipo": "atendimento_resolvido",
+   "nome": "Atendimento resolvido",
+   "grupo": "Conversa",
+   "descricao": "Um atendimento foi encerrado.",
+   "campos": [
+    {
+     "k": "fila",
+     "rotulo": "Fila (vazio = qualquer)",
+     "tipo": "select",
+     "opcoes": "filas"
+    }
+   ],
+   "aviso": "Funciona depois do vínculo com o sistema jurídico (passo 2)."
+  },
+  {
+   "tipo": "tag_adicionada",
+   "nome": "Tag adicionada",
+   "grupo": "Contato",
+   "descricao": "Uma tag foi aplicada ao contato.",
+   "campos": [
+    {
+     "k": "tag",
+     "rotulo": "Tag",
+     "tipo": "select",
+     "opcoes": "tags",
+     "obrig": true
+    }
+   ],
+   "aviso": "Funciona depois do vínculo com o sistema jurídico (passo 2)."
+  },
+  {
+   "tipo": "tag_removida",
+   "nome": "Tag removida",
+   "grupo": "Contato",
+   "descricao": "Uma tag foi tirada do contato.",
+   "campos": [
+    {
+     "k": "tag",
+     "rotulo": "Tag",
+     "tipo": "select",
+     "opcoes": "tags",
+     "obrig": true
+    }
+   ],
+   "aviso": "Funciona depois do vínculo com o sistema jurídico (passo 2)."
+  },
+  {
+   "tipo": "negocio_criado",
+   "nome": "Negócio criado",
+   "grupo": "CRM",
+   "descricao": "Um negócio novo entrou no funil.",
+   "campos": [
+    {
+     "k": "funil",
+     "rotulo": "Funil",
+     "tipo": "select",
+     "opcoes": "funis",
+     "obrig": true
+    },
+    {
+     "k": "origem",
+     "rotulo": "Origem (vazio = qualquer)",
+     "tipo": "select",
+     "opcoes": "origens"
+    }
+   ]
+  },
+  {
+   "tipo": "etapa_mudou",
+   "nome": "Negócio mudou de etapa",
+   "grupo": "CRM",
+   "descricao": "O negócio entrou numa etapa do funil.",
+   "campos": [
+    {
+     "k": "funil",
+     "rotulo": "Funil",
+     "tipo": "select",
+     "opcoes": "funis",
+     "obrig": true
+    },
+    {
+     "k": "etapa",
+     "rotulo": "Etapa",
+     "tipo": "select",
+     "opcoes": "etapas",
+     "depende": "funil",
+     "obrig": true
+    }
+   ]
+  },
+  {
+   "tipo": "negocio_ganho",
+   "nome": "Negócio ganho",
+   "grupo": "CRM",
+   "descricao": "O negócio foi marcado como ganho.",
+   "campos": [
+    {
+     "k": "funil",
+     "rotulo": "Funil",
+     "tipo": "select",
+     "opcoes": "funis",
+     "obrig": true
+    }
+   ]
+  },
+  {
+   "tipo": "negocio_perdido",
+   "nome": "Negócio perdido",
+   "grupo": "CRM",
+   "descricao": "O negócio foi marcado como perdido.",
+   "campos": [
+    {
+     "k": "funil",
+     "rotulo": "Funil",
+     "tipo": "select",
+     "opcoes": "funis",
+     "obrig": true
+    },
+    {
+     "k": "motivo",
+     "rotulo": "Motivo (vazio = qualquer)",
+     "tipo": "select",
+     "opcoes": "perdas"
+    }
+   ]
+  },
+  {
+   "tipo": "negocio_parado",
+   "nome": "Negócio parado na etapa",
+   "grupo": "CRM",
+   "descricao": "O negócio está há dias na mesma etapa.",
+   "campos": [
+    {
+     "k": "funil",
+     "rotulo": "Funil",
+     "tipo": "select",
+     "opcoes": "funis",
+     "obrig": true
+    },
+    {
+     "k": "etapa",
+     "rotulo": "Etapa",
+     "tipo": "select",
+     "opcoes": "etapas",
+     "depende": "funil",
+     "obrig": true
+    },
+    {
+     "k": "dias",
+     "rotulo": "Dias parado",
+     "tipo": "numero",
+     "obrig": true,
+     "padrao": 3
+    }
+   ]
+  },
+  {
+   "tipo": "campo_alterado",
+   "nome": "Campo do negócio alterado",
+   "grupo": "CRM",
+   "descricao": "Um campo personalizado do negócio mudou.",
+   "campos": [
+    {
+     "k": "campo",
+     "rotulo": "Campo",
+     "tipo": "select",
+     "opcoes": "campos",
+     "obrig": true
+    }
+   ]
+  },
+  {
+   "tipo": "data_campo",
+   "nome": "Data de um campo",
+   "grupo": "CRM",
+   "descricao": "Dias antes (ou no dia) de uma data guardada num campo do negócio.",
+   "campos": [
+    {
+     "k": "campo",
+     "rotulo": "Campo de data",
+     "tipo": "select",
+     "opcoes": "campos",
+     "obrig": true
+    },
+    {
+     "k": "dias_antes",
+     "rotulo": "Dias antes (0 = no dia)",
+     "tipo": "numero",
+     "padrao": 0
+    }
+   ]
+  },
+  {
+   "tipo": "tarefa_atrasada",
+   "nome": "Tarefa atrasada",
+   "grupo": "Tarefas",
+   "descricao": "Uma tarefa sobre o contato passou do prazo.",
+   "campos": []
+  },
+  {
+   "tipo": "webhook_entrada",
+   "nome": "Webhook de entrada",
+   "grupo": "Integrações",
+   "descricao": "Outro sistema (ex.: gestor de tráfego) manda um lead por HTTP. Depende da integração de leads.",
+   "campos": [],
+   "aviso": "Funciona depois de ligar a integração de leads (crm_0001)."
+  }
+ ],
+ "acoes": [
+  {
+   "tipo": "mensagem",
+   "nome": "Enviar mensagem",
+   "grupo": "Comunicação",
+   "descricao": "Envia uma mensagem ao contato, pelo canal da conversa.",
+   "campos": [
+    {
+     "k": "texto",
+     "rotulo": "Mensagem",
+     "tipo": "textarea",
+     "obrig": true,
+     "dica": "Variáveis: {nome} (primeiro nome) e {empresa}."
+    }
+   ]
+  },
+  {
+   "tipo": "resposta_rapida",
+   "nome": "Enviar resposta rápida",
+   "grupo": "Comunicação",
+   "descricao": "Envia um texto pronto das respostas rápidas.",
+   "campos": [
+    {
+     "k": "atalho",
+     "rotulo": "Resposta rápida",
+     "tipo": "select",
+     "opcoes": "respostas",
+     "obrig": true
+    }
+   ]
+  },
+  {
+   "tipo": "avisar_equipe",
+   "nome": "Avisar alguém da equipe",
+   "grupo": "Comunicação",
+   "descricao": "Menção interna para a pessoa escolhida: aparece na fila Menções (não vai ao cliente).",
+   "campos": [
+    {
+     "k": "pessoa",
+     "rotulo": "Quem avisar",
+     "tipo": "select",
+     "opcoes": "pessoas",
+     "obrig": true
+    },
+    {
+     "k": "texto",
+     "rotulo": "Aviso",
+     "tipo": "textarea",
+     "obrig": true
+    }
+   ]
+  },
+  {
+   "tipo": "tag_adicionar",
+   "nome": "Adicionar tag",
+   "grupo": "Contato",
+   "descricao": "Aplica uma tag ao contato.",
+   "campos": [
+    {
+     "k": "tag",
+     "rotulo": "Tag",
+     "tipo": "select",
+     "opcoes": "tags",
+     "obrig": true
+    }
+   ],
+   "aviso": "Funciona depois do vínculo com o sistema jurídico (passo 2)."
+  },
+  {
+   "tipo": "tag_remover",
+   "nome": "Remover tag",
+   "grupo": "Contato",
+   "descricao": "Tira uma tag do contato.",
+   "campos": [
+    {
+     "k": "tag",
+     "rotulo": "Tag",
+     "tipo": "select",
+     "opcoes": "tags",
+     "obrig": true
+    }
+   ],
+   "aviso": "Funciona depois do vínculo com o sistema jurídico (passo 2)."
+  },
+  {
+   "tipo": "transferir",
+   "nome": "Transferir para fila",
+   "grupo": "Contato",
+   "descricao": "Muda o atendimento de fila (sem responsável).",
+   "campos": [
+    {
+     "k": "fila",
+     "rotulo": "Fila",
+     "tipo": "select",
+     "opcoes": "filas",
+     "obrig": true
+    }
+   ],
+   "aviso": "Funciona depois do vínculo com o sistema jurídico (passo 2)."
+  },
+  {
+   "tipo": "atribuir",
+   "nome": "Atribuir responsável",
+   "grupo": "Contato",
+   "descricao": "Define quem cuida do atendimento.",
+   "campos": [
+    {
+     "k": "pessoa",
+     "rotulo": "Responsável (vazio = rodízio da fila)",
+     "tipo": "select",
+     "opcoes": "pessoas"
+    }
+   ],
+   "aviso": "Funciona depois do passo 2 (atendimento ligado ao banco). O CRM não tem dono por negócio."
+  },
+  {
+   "tipo": "atualizar_campo",
+   "nome": "Atualizar campo",
+   "grupo": "Contato",
+   "descricao": "Grava um valor num campo do negócio.",
+   "campos": [
+    {
+     "k": "campo",
+     "rotulo": "Campo",
+     "tipo": "select",
+     "opcoes": "campos",
+     "obrig": true
+    },
+    {
+     "k": "valor",
+     "rotulo": "Valor",
+     "tipo": "texto",
+     "obrig": true
+    }
+   ]
+  },
+  {
+   "tipo": "criar_negocio",
+   "nome": "Criar negócio",
+   "grupo": "CRM",
+   "descricao": "Cria um negócio para o contato (se ainda não houver no funil).",
+   "campos": [
+    {
+     "k": "funil",
+     "rotulo": "Funil",
+     "tipo": "select",
+     "opcoes": "funis",
+     "obrig": true
+    },
+    {
+     "k": "origem",
+     "rotulo": "Origem",
+     "tipo": "select",
+     "opcoes": "origens"
+    }
+   ]
+  },
+  {
+   "tipo": "mover_etapa",
+   "nome": "Mover de etapa",
+   "grupo": "CRM",
+   "descricao": "Muda o negócio de etapa.",
+   "campos": [
+    {
+     "k": "funil",
+     "rotulo": "Funil",
+     "tipo": "select",
+     "opcoes": "funis",
+     "obrig": true
+    },
+    {
+     "k": "etapa",
+     "rotulo": "Etapa",
+     "tipo": "select",
+     "opcoes": "etapas",
+     "depende": "funil",
+     "obrig": true
+    }
+   ]
+  },
+  {
+   "tipo": "marcar_ganho",
+   "nome": "Marcar como ganho",
+   "grupo": "CRM",
+   "descricao": "Encerra o negócio como ganho.",
+   "campos": []
+  },
+  {
+   "tipo": "marcar_perdido",
+   "nome": "Marcar como perdido",
+   "grupo": "CRM",
+   "descricao": "Encerra o negócio como perdido.",
+   "campos": [
+    {
+     "k": "motivo",
+     "rotulo": "Motivo",
+     "tipo": "select",
+     "opcoes": "perdas",
+     "obrig": true
+    }
+   ]
+  },
+  {
+   "tipo": "criar_atividade",
+   "nome": "Criar atividade no negócio",
+   "grupo": "CRM",
+   "descricao": "Ligação, reunião, follow-up ou tarefa no negócio.",
+   "campos": [
+    {
+     "k": "tipo_atividade",
+     "rotulo": "Tipo",
+     "tipo": "select",
+     "opcoes": "tipos_atividade",
+     "obrig": true,
+     "padrao": "ligacao"
+    },
+    {
+     "k": "titulo",
+     "rotulo": "O que fazer",
+     "tipo": "texto",
+     "obrig": true
+    },
+    {
+     "k": "em_dias",
+     "rotulo": "Prazo (dias a partir de agora)",
+     "tipo": "numero",
+     "padrao": 1
+    }
+   ]
+  },
+  {
+   "tipo": "criar_tarefa",
+   "nome": "Criar tarefa",
+   "grupo": "CRM",
+   "descricao": "Tarefa individual sobre o contato (aba Tarefas).",
+   "campos": [
+    {
+     "k": "titulo",
+     "rotulo": "O que fazer",
+     "tipo": "texto",
+     "obrig": true
+    },
+    {
+     "k": "responsavel",
+     "rotulo": "Responsável (administrador ou fila Comercial)",
+     "tipo": "select",
+     "opcoes": "pessoas",
+     "obrig": true
+    },
+    {
+     "k": "em_horas",
+     "rotulo": "Prazo (horas a partir de agora)",
+     "tipo": "numero",
+     "padrao": 24
+    }
+   ]
+  },
+  {
+   "tipo": "aguardar",
+   "nome": "Aguardar",
+   "grupo": "Controle",
+   "descricao": "Espera um tempo antes do próximo passo.",
+   "campos": [
+    {
+     "k": "quantidade",
+     "rotulo": "Quanto tempo",
+     "tipo": "numero",
+     "obrig": true,
+     "padrao": 1
+    },
+    {
+     "k": "unidade",
+     "rotulo": "Unidade",
+     "tipo": "select",
+     "opcoes": "unidades",
+     "obrig": true,
+     "padrao": "dias"
+    }
+   ]
+  },
+  {
+   "tipo": "aguardar_resposta",
+   "nome": "Aguardar resposta",
+   "grupo": "Controle",
+   "descricao": "Espera o cliente responder; abre um caminho para cada caso.",
+   "ramos": [
+    "Respondeu",
+    "Não respondeu"
+   ],
+   "campos": [
+    {
+     "k": "horas",
+     "rotulo": "Esperar até (horas)",
+     "tipo": "numero",
+     "obrig": true,
+     "padrao": 24
+    }
+   ]
+  },
+  {
+   "tipo": "se",
+   "nome": "Se / senão",
+   "grupo": "Controle",
+   "descricao": "Confere uma ou mais condições e segue por Sim ou Não.",
+   "ramos": [
+    "Sim",
+    "Não"
+   ],
+   "campos": [
+    {
+     "k": "modo",
+     "rotulo": "Seguir por “Sim” quando",
+     "tipo": "select",
+     "opcoes": "modos",
+     "obrig": true,
+     "padrao": "todas"
+    },
+    {
+     "k": "condicoes",
+     "rotulo": "Condições",
+     "tipo": "condicoes",
+     "obrig": true,
+     "padrao": [
+      {
+       "sujeito": "tag",
+       "operador": "e",
+       "valor": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "tipo": "horario",
+   "nome": "Dentro do horário?",
+   "grupo": "Controle",
+   "descricao": "Segue por um caminho dentro e outro fora do horário do setor.",
+   "ramos": [
+    "Dentro do horário",
+    "Fora do horário"
+   ],
+   "campos": [
+    {
+     "k": "fila",
+     "rotulo": "Horário do setor",
+     "tipo": "select",
+     "opcoes": "filas",
+     "obrig": true
+    }
+   ]
+  },
+  {
+   "tipo": "ir_para",
+   "nome": "Ir para outro fluxo",
+   "grupo": "Controle",
+   "descricao": "Encerra este fluxo e inscreve o contato em outro.",
+   "fim": true,
+   "campos": [
+    {
+     "k": "fluxo",
+     "rotulo": "Fluxo",
+     "tipo": "select",
+     "opcoes": "fluxos",
+     "obrig": true
+    }
+   ]
+  },
+  {
+   "tipo": "fim",
+   "nome": "Encerrar fluxo",
+   "grupo": "Controle",
+   "descricao": "Termina o fluxo para este contato.",
+   "fim": true,
+   "campos": []
+  },
+  {
+   "tipo": "webhook",
+   "nome": "Chamar webhook",
+   "grupo": "Integrações",
+   "descricao": "Envia os dados do contato e do negócio para outro sistema (POST).",
+   "campos": [
+    {
+     "k": "url",
+     "rotulo": "Endereço (https://…)",
+     "tipo": "texto",
+     "obrig": true
+    }
+   ]
+  }
+ ]
+}

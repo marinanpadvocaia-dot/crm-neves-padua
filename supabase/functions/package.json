@@ -1,0 +1,5 @@
+{
+  "private": true,
+  "type": "module",
+  "description": "Só para os testes locais em Node lerem estes .ts como módulos ES. O Deno (Supabase) ignora este arquivo."
+}

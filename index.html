@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Atendimento Neves Pádua</title>
+<script>/* tema escolhido no app (padrão: claro); não segue o sistema */try{document.documentElement.dataset.theme=localStorage.getItem('np-tema')==='dark'?'dark':'light'}catch(e){document.documentElement.dataset.theme='light'}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Public+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<header class="top"><div class="in wrap">
+  <div class="brand"><span class="logo" role="img" aria-label="Neves Pádua Advocacia"></span><span id="ambbadge" class="amb-badge" hidden tabindex="0">Demonstração · dados fictícios</span></div>
+  <div class="who">
+    <button class="chip cn-resumo" type="button" data-cn="resumo" id="cnresumo"></button>
+    <label for="role">Ver como (demonstração)</label>
+    <select id="role">
+      <option value="atendente">Atendente (Ana Luiza)</option>
+      <option value="marina">Atendente (Marina)</option>
+      <option value="gabriel">Comercial (Gabriel)</option>
+      <option value="lider">Líder de setor (Mario)</option>
+      <option value="admin">Administrador (Ana Júlia)</option>
+    </select>
+    <button class="chip themebtn" type="button" data-act="theme"></button>
+    <button class="chip" type="button" data-act="logout">Sair</button>
+  </div>
+</div></header>
+<div id="shell"><nav id="rail" aria-label="Seções"></nav><div id="views">
+<div id="ambbar" class="note-bar wrap" hidden></div>
+<div id="canais" class="canais wrap" aria-label="Estado dos canais"></div>
+
+<section id="login" aria-label="Entrar"><div class="lg">
+  <button class="chip themebtn" type="button" data-act="theme"></button>
+  <div class="brand"><span class="logo" role="img" aria-label="Neves Pádua Advocacia"></span></div>
+  <form id="lgf" novalidate><h1>Entrar</h1>
+    <label>E-mail<input id="le" type="email" autocomplete="username" placeholder="nome@escritorio.com.br"></label>
+    <label>Senha<input id="lp" type="password" autocomplete="current-password"></label>
+    <div id="lerr" hidden role="alert"></div>
+    <button class="btn pri" type="submit">Entrar</button>
+    <button type="button" class="back" data-act="forgot">Esqueci minha senha</button>
+  </form>
+  <form id="lsenha" novalidate hidden><h1>Crie sua senha</h1>
+    <p class="src" style="margin:0" id="lsenhaq">Use pelo menos 10 caracteres. A senha é só sua: o escritório não tem acesso a ela.</p>
+    <label>Nova senha<input id="ls1" type="password" autocomplete="new-password" minlength="10"></label>
+    <label>Repita a senha<input id="ls2" type="password" autocomplete="new-password" minlength="10"></label>
+    <div id="lserr" class="err" hidden role="alert"></div>
+    <button class="btn pri" type="submit">Salvar senha e entrar</button>
+  </form>
+
+  <div class="demo"><b>Demonstração</b><span class="src">Nesta versão qualquer senha serve. Entre direto como:</span>
+    <button type="button" class="btn" data-act="demoLogin" data-r="atendente">Atendente · Ana Luiza</button>
+    <button type="button" class="btn" data-act="demoLogin" data-r="marina">Atendente · Marina</button>
+    <button type="button" class="btn" data-act="demoLogin" data-r="gabriel">Comercial · Gabriel</button>
+    <button type="button" class="btn" data-act="demoLogin" data-r="lider">Líder de setor · Mario</button>
+    <button type="button" class="btn" data-act="demoLogin" data-r="admin">Administrador · Ana Júlia</button></div>
+</div></section>
+<main id="app" class="wrap" data-pane="list">
+  <section id="list" class="pane"></section>
+  <section id="chat" class="pane"></section>
+  <aside id="side" class="pane"></aside>
+</main>
+<section id="reports" class="wrap" hidden></section>
+<section id="settings" class="wrap" hidden></section>
+<section id="fluxos" class="wrap" hidden></section>
+<section id="crm" class="wrap" hidden></section>
+<section id="tarefas" class="wrap" hidden></section>
+<section id="ia" class="wrap" hidden></section>
+</div></div>
+<div id="toast" class="toast" role="status" hidden></div>
+<script src="dist/app.js"></script>
+</body></html>
